@@ -1,4 +1,4 @@
-# DS8008_LLM_tree
+# LLM Trees - Decision Trees through LLMs
 ![python](https://img.shields.io/badge/python-3.12.13%2B-blue)
 
 ## SUMMARY
