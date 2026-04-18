@@ -1,4 +1,4 @@
-from ..evaluate_creditscore import (
+from ..model_extractors.credit_models import (
     run_model_0,
     run_model_1,
     run_model_2,

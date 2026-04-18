@@ -20,9 +20,9 @@ def rt_embeddings(X_train, y_train, X_test):
         lambda X: model.transform(X)
     )
     
-    emb_train = pd.DataFrame(emb_transformer.transform(X_train))
+    emb_train = pd.DataFrame(emb_transformer.transform(X_train).toarray())
     emb_train['target'] = y_train
-    emb_test = emb_transformer.transform(X_test).to_array()
+    emb_test = emb_transformer.transform(X_test).toarray()
 
     return emb_train, emb_test
 
@@ -45,7 +45,7 @@ def et_embeddings(X_train, y_train, X_test, self_supervised=True):
     
     train_emb = pd.DataFrame(transforms.fit_transform(X_train))
     train_emb['target'] = y_train
-    test_emb = transforms.transform(X_test).to_array()
+    test_emb = transforms.transform(X_test)
     return train_emb, test_emb
 
 def rf_embeddings(X_train, y_train, X_test, self_supervied=True):
@@ -68,8 +68,7 @@ def rf_embeddings(X_train, y_train, X_test, self_supervied=True):
     
     train_emb = pd.DataFrame(transforms.fit_transform(X_train))
     train_emb['target'] = y_train
-    test_emb = transforms.transform(X_test).to_array()
-    
+    test_emb = transforms.transform(X_test)
     return train_emb, test_emb
 
 def xgb_embeddings(X_train, y_train, X_test, self_supervised=True):
@@ -92,7 +91,7 @@ def xgb_embeddings(X_train, y_train, X_test, self_supervised=True):
     
     train_emb = pd.DataFrame(transforms.fit_transform(X_train))
     train_emb['target'] = y_train
-    test_emb = transforms.transform(X_test).to_array()
+    test_emb = transforms.transform(X_test)
     
     return train_emb, test_emb
 
