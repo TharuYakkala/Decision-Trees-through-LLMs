@@ -1,4 +1,4 @@
-from ..evaluate_boxing2 import (
+from ..model_extractors.boxing2_models import (
     run_model_0,
     run_model_1,
     run_model_2,
@@ -6,19 +6,13 @@ from ..evaluate_boxing2 import (
     run_model_4
 )
 
-from pathlib import Path
-import pandas as pd
+
 import numpy as np
 
 runners = [run_model_0, run_model_1, run_model_2, run_model_3, run_model_4]
 
         
-def get_emb_features_boxing2():
-    data_path = Path("./data/data_sets/boxing2")
-    X_path = data_path / "X.csv"
-    
-    X = pd.read_csv(X_path)
-    
+def get_emb_features_boxing2(X):
     output_emb = []
     for _, row in X.iterrows():
         row_emb = []

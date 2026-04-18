@@ -1,4 +1,3 @@
-
 from ..creditscore import dt_function_0, dt_function_1, dt_function_2, dt_function_3, dt_function_4
 
 OWN_HOME_MAP = {1: "yes", 0: "no"}

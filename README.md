@@ -1,5 +1,5 @@
 # DS8008_LLM_tree
-![python](https://img.shields.io/badge/python-3.13%2B-blue)
+![python](https://img.shields.io/badge/python-3.12.13%2B-blue)
 
 ## SUMMARY
 Replication of Oh LLM, I’m Asking Thee, Please Give Me a Decision Tree”: Zero-Shot Decision Tree Induction and Embedding with Large Language Models (KDD conference) paper for DS8008 Class.
@@ -43,7 +43,7 @@ DS8008_LLM_TREE
 ```
 
 ## Required Environment
-- python >= 3.13
+- python >= 3.12.13
 - There aren't many packages needed for this, as it's the point of the paper to create simplified functions that can serve as decision tree modems.
 - You only need scikit-learn, pandas, and numpy which you probably already have in your environment, and if not you can run the bellow in your terminal or notebook.
 

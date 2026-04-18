@@ -1,4 +1,4 @@
-from ..evaluate_bankruptcy import (
+from ..model_extractors.bankruptcy_models import (
     run_model_0,
     run_model_1,
     run_model_2,
@@ -6,19 +6,12 @@ from ..evaluate_bankruptcy import (
     run_model_4
 )
 
-from pathlib import Path
-import pandas as pd
 import numpy as np
 
 runners = [run_model_0, run_model_1, run_model_2, run_model_3, run_model_4]
 
         
-def get_emb_features_bankruptcy():
-    data_path = Path("./data/data_sets/bankruptcy")
-    X_path = data_path / "X.csv"
-    
-    X = pd.read_csv(X_path)
-    
+def get_emb_features_bankruptcy(X):
     output_emb = []
     for _, row in X.iterrows():
         row_emb = []

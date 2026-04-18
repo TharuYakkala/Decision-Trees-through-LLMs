@@ -6,8 +6,6 @@ from ..model_extractors.credit_models import (
     run_model_4
 )
 
-from pathlib import Path
-import pandas as pd
 import numpy as np
 
 runners = [run_model_0, run_model_1, run_model_2, run_model_3, run_model_4]
