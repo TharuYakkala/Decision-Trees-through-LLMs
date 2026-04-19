@@ -1,0 +1,24 @@
+```python
+def decision_tree_function(row):
+    # Precompute binary vector embeddings
+    node1 = int(row['island'] != 2)  # Check if island is not Torgersen
+    node2 = int(row['island'] == 0)  # Check if island is Biscoe
+    node3 = int(row['culmen_length_mm'] < 50)  # Check if culmen length is less than 50 mm
+    node4 = int(row['flipper_length_mm'] < 200)  # Check if flipper length is less than 200 mm
+    node5 = int(row['body_mass_g'] < 4000)  # Check if body mass is less than 4000 g
+    node6 = int(row['sex'] == 1)  # Check if sex is female
+
+    emb = [node1, node2, node3, node4, node5, node6]
+
+    # Apply decision tree logic
+    if node1 and node2 and node3:
+        prediction = 0  # Adelie
+    elif node1 and not node2 and node4:
+        prediction = 1  # Chinstrap
+    elif not node1 and node5 and node6:
+        prediction = 2  # Gentoo
+    else:
+        prediction = 0  # Default to Adelie if none of the above conditions are met
+
+    return prediction, emb
+```

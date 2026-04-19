@@ -1,0 +1,12 @@
+```python
+def predict(row):
+    # Inner node: check if first‑year wage increase is high AND a cost‑of‑living adjustment is provided
+    node1 = int(row['wage increase first year'] > 4.5 and row['cost of living adjustment'] == 'tcf')
+    emb = [node1]
+
+    # Decision: good settlement if node1 is satisfied, otherwise bad
+    if node1 == 1:
+        return 1, emb   # good
+    else:
+        return 0, emb   # bad
+```

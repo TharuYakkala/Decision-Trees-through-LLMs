@@ -1,0 +1,28 @@
+def func(row):
+    node1 = int(row['cost of living adjustment'] != 'none')
+    node2 = int(row['wage increase first year'] > 5)
+    node3 = int(row['vacation'] == 'gnr')
+    node4 = int(row['pension'] in ['ret_allw', 'empl_contr'])
+    node5 = int(row['education allowance'] == True)
+    node6 = int(row['bereavement assistance'] == True)
+    node7 = int(row['contribution to dental plan'] == 'full')
+    node8 = int(row['contribution to health plan'] == 'full')
+    emb = [node1, node2, node3, node4, node5, node6, node7, node8]
+    
+    if node1 == 0:
+        return 0, emb
+    if node2 == 1:
+        return 1, emb
+    if node3 == 1:
+        return 1, emb
+    if node4 == 1:
+        return 1, emb
+    if node5 == 1:
+        return 1, emb
+    if node6 == 1:
+        return 1, emb
+    if node7 == 1:
+        return 1, emb
+    if node8 == 1:
+        return 1, emb
+    return 0, emb

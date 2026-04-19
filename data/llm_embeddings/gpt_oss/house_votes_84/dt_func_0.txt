@@ -1,0 +1,20 @@
+```python
+def predict(row):
+    # Precompute binary embeddings for inner nodes
+    node1 = int(row['immigration'] == 2)                     # 1 = yes, 0 = no
+    node2 = int(row['physician-fee-freeze'] == 2)             # 1 = yes, 0 = no
+    node3 = int(row['education-spending'] == 2)               # 1 = yes, 0 = no
+    emb = [node1, node2, node3]
+
+    # Decision tree logic
+    if node1:                     # immigration vote = yes
+        if node2:                 # physician fee freeze vote = yes
+            return 1, emb         # Republican
+        else:                     # physician fee freeze vote = no
+            return 0, emb         # Democrat
+    else:                         # immigration vote = no
+        if node3:                 # education spending vote = yes
+            return 0, emb         # Democrat
+        else:                     # education spending vote = no
+            return 1, emb         # Republican
+```

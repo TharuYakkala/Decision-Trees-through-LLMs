@@ -1,0 +1,29 @@
+def func(row):
+    node1 = int(row['aid-to-nicaraguan-contras'] > 1.5)
+    node2 = int(row['synfuels-corporation-cutback'] > 1.5)
+    node3 = int(row['mx-missile'] > 1.5)
+    node4 = int(row['immigration'] > 1.5)
+    node5 = int(row['education-spending'] > 1.5)
+    node6 = int(row['crime'] > 1.5)
+    emb = [node1, node2, node3, node4, node5, node6]
+    
+    if node1 == 1:
+        if node2 == 1:
+            prediction = 1
+        else:
+            if node3 == 1:
+                prediction = 1
+            else:
+                prediction = 0
+    else:
+        if node4 == 1:
+            if node5 == 1:
+                prediction = 1
+            else:
+                prediction = 0
+        else:
+            if node6 == 1:
+                prediction = 0
+            else:
+                prediction = 1
+    return prediction, emb

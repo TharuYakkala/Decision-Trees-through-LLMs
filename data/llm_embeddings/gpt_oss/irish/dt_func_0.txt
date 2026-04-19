@@ -1,0 +1,25 @@
+```python
+def func(row):
+    # Precompute binary node conditions
+    node1 = int(row['Educational_level'] <= 5)      # 1 if level ≤ 5, else 0
+    node2 = int(row['DVRT'] <= 50)                 # 1 if DVRT ≤ 50, else 0
+    node3 = int(row['Prestige_score'] <= 20)       # 1 if prestige ≤ 20, else 0
+    node4 = int(row['Sex'] == 1)                   # 1 if male, else 0
+    
+    emb = [node1, node2, node3, node4]
+    
+    # Decision tree logic
+    if node1:                         # Educational_level ≤ 5
+        if node2:                    # DVRT ≤ 50
+            return 0, emb            # School leaving certificate NOT taken
+        else:                        # DVRT > 50
+            return 1, emb            # Certificate taken
+    else:                             # Educational_level > 5
+        if node3:                    # Prestige_score ≤ 20
+            return 1, emb            # Certificate taken
+        else:                        # Prestige_score > 20
+            if node4:                # Male
+                return 0, emb        # Certificate NOT taken
+            else:                    # Female
+                return 1, emb        # Certificate taken
+```

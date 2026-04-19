@@ -1,0 +1,14 @@
+def solvency_tree(row):
+    node1 = int(row['WC/TA'] > 0.2)
+    node2 = int(row['Equity/TL'] > 0.5)
+    node3 = int(row['EBIT/TA'] > 0.1)
+    emb = [node1, node2, node3]
+    
+    if node1 == 1:
+        return 1, emb
+    elif node2 == 1:
+        return 1, emb
+    elif node3 == 1:
+        return 1, emb
+    else:
+        return 0, emb

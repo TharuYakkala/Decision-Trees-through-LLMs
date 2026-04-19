@@ -1,0 +1,22 @@
+```python
+def predict_party(row):
+    # Precompute binary node activations
+    node1 = int(row['mx missile'] > 1)                      # MX missile vote
+    node2 = int(row['anti satellite test ban'] > 1)         # Anti-satellite test ban vote
+    node3 = int(row['education spending'] > 1)              # Education spending vote
+    emb = [node1, node2, node3]
+
+    # Decision tree logic
+    if node1 == 1:  # Voted YES on MX missile
+        if node2 == 1:  # Voted YES on anti-satellite test ban
+            pred = 1  # Republican
+        else:          # Voted NO on anti-satellite test ban
+            pred = 0  # Democrat
+    else:  # Voted NO on MX missile
+        if node3 == 1:  # Voted YES on education spending
+            pred = 0  # Democrat
+        else:          # Voted NO on education spending
+            pred = 1  # Republican
+
+    return pred, emb
+```

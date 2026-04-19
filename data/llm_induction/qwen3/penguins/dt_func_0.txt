@@ -1,0 +1,11 @@
+def func(row):
+    node1 = int(row['flipper_length_mm'] > 200)
+    node2 = int(row['culmen_length_mm'] <= 39)
+    emb = [node1, node2]
+    if node1 == 1:
+        return 2, emb
+    else:
+        if node2 == 1:
+            return 0, emb
+        else:
+            return 1, emb

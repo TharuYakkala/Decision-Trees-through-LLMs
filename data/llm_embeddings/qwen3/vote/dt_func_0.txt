@@ -1,0 +1,23 @@
+def func(row):
+    node1 = int(row['aid to nicaraguan contras'] == 2)
+    node2 = int(row['mx missile'] == 2)
+    node3 = int(row['synfuels corporation cutback'] == 2)
+    node4 = int(row['crime'] == 2)
+    node5 = int(row['duty free exports'] == 2)
+    emb = [node1, node2, node3, node4, node5]
+    if node1 == 1:
+        return 1, emb
+    else:
+        if node2 == 1:
+            return 1, emb
+        else:
+            if node3 == 1:
+                return 0, emb
+            else:
+                if node4 == 1:
+                    return 1, emb
+                else:
+                    if node5 == 1:
+                        return 0, emb
+                    else:
+                        return 1, emb

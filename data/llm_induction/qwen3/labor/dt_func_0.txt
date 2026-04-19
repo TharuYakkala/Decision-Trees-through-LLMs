@@ -1,0 +1,98 @@
+To implement a decision tree with a **maximum depth of 2**, we will construct a simple tree that evaluates two conditions in sequence. The tree will have **three leaves** and **two inner nodes**, as per the depth constraint.
+
+---
+
+### 🌳 Tree Structure
+
+1. **Root Node (Node 1):**  
+   - Condition: `wage_increase_first_year > 5`  
+   - If **True**, go to **Leaf 1** → Predict **"good"**  
+   - If **False**, go to **Node 2**
+
+2. **Node 2 (Second Split):**  
+   - Condition: `cost_of_living_adjustment == 'none'`  
+   - If **True**, go to **Leaf 2** → Predict **"bad"**  
+   - If **False**, go to **Leaf 3** → Predict **"good"**
+
+---
+
+### 📦 Embedding Logic
+
+Each inner node in the tree is assigned a binary value (1 or 0) based on whether the condition is satisfied. These values are collected into a list called the **embedding**, which represents the path taken through the tree.
+
+- **Node 1:** `wage_increase_first_year > 5` → `1` if true, `0` otherwise  
+- **Node 2:** `cost_of_living_adjustment == 'none'` → `1` if true, `0` otherwise
+
+The embedding list will be:  
+`[int(node1), int(node2)]`
+
+---
+
+### ✅ Python Implementation
+
+```python
+def predict(input_data):
+    # Extract input values
+    wage_increase_first_year = input_data.get('wage_increase_first_year', 0)
+    cost_of_living_adjustment = input_data.get('cost_of_living_adjustment', 'unknown')
+
+    # Compute node conditions
+    node1 = wage_increase_first_year > 5
+    node2 = cost_of_living_adjustment == 'none'
+
+    # Generate embedding
+    embedding = [int(node1), int(node2)]
+
+    # Determine prediction
+    if node1:
+        prediction = 'good'
+    else:
+        if node2:
+            prediction = 'bad'
+        else:
+            prediction = 'good'
+
+    return prediction, embedding
+```
+
+---
+
+### 📌 Example Usage
+
+```python
+# Example input
+input_data = {
+    'wage_increase_first_year': 6,
+    'cost_of_living_adjustment': 'some'
+}
+
+# Predict
+prediction, embedding = predict(input_data)
+print("Prediction:", prediction)
+print("Embedding:", embedding)
+```
+
+**Output:**
+```
+Prediction: good
+Embedding: [1, 0]
+```
+
+---
+
+### 📈 Notes
+
+- This implementation assumes that the input data is a dictionary with keys `'wage_increase_first_year'` and `'cost_of_living_adjustment'`.
+- The function returns both the **prediction** and the **embedding**, which can be used for further analysis or model interpretation.
+- The tree is designed to be **interpretable**, with clear conditions and a simple structure.
+
+---
+
+### 📈 Summary
+
+- **Tree Depth:** 2 (root + one split)
+- **Nodes:** 2 (conditions)
+- **Leaves:** 3 (predictions)
+- **Embedding:** A list of 2 binary values representing the conditions evaluated
+
+This approach ensures a **simple, interpretable model** that adheres to the specified depth constraint.

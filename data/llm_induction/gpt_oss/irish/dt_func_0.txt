@@ -1,0 +1,19 @@
+```python
+def predict(row):
+    # Precompute binary node evaluations
+    node1 = int(row['DVRT'] > 50)          # Root split on DVRT
+    node2 = int(row['Educational_level'] > 5)  # Second level split on Educational_level
+
+    emb = [node1, node2]
+
+    # Decision tree logic
+    if node1:          # DVRT > 50
+        pred = 1       # Certificate taken
+    else:              # DVRT <= 50
+        if node2:      # Educational_level > 5
+            pred = 1   # Certificate taken
+        else:          # Educational_level <= 5
+            pred = 0   # Certificate not taken
+
+    return pred, emb
+```

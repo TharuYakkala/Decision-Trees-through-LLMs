@@ -1,0 +1,20 @@
+```python
+def decision_tree_predictor(row):
+    node1 = int(row['DVRT'] >= 40)
+    node2 = int(row['Prestige_score'] > 15)
+    node3 = int(row['Educational_level'] <= 5)
+    node4 = int(row['Sex'] == 1)
+
+    emb = [node1, node2, node3, node4]
+
+    if node1 and node2:
+        prediction = 1
+    elif node3 and not node4:
+        prediction = 0
+    elif node1 and not node2 and node3:
+        prediction = 1
+    else:
+        prediction = 0
+
+    return prediction, emb
+```

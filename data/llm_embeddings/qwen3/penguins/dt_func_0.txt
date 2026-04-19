@@ -1,0 +1,21 @@
+def predict_species(row):
+    node1 = int(row['flipper_length_mm'] > 210)
+    node2 = int(row['culmen_length_mm'] < 35)
+    node3 = int(row['island'] == 2)
+    node4 = int(row['body_mass_g'] > 3600)
+    emb = [node1, node2, node3, node4]
+    
+    if node1 == 1:
+        prediction = 2
+    else:
+        if node2 == 1:
+            prediction = 0
+        else:
+            if node3 == 1:
+                prediction = 2
+            else:
+                if node4 == 1:
+                    prediction = 1
+                else:
+                    prediction = 0
+    return prediction, emb

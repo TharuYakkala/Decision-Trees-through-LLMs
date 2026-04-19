@@ -1,0 +1,36 @@
+```python
+def classify_party(row):
+    # Precompute binary vector embeddings for all inner nodes
+    node_immigration = int(row['immigration'] > 1.5)
+    node_crime = int(row['crime'] > 1.5)
+    node_mx_missile = int(row['mx missile'] > 1.5)
+    node_aid_nicaraguan_contras = int(row['aid to nicaraguan contras'] > 1.5)
+    node_religious_groups_in_schools = int(row['religious groups in schools'] > 1.5)
+    emb = [
+        node_immigration,
+        node_crime,
+        node_mx_missile,
+        node_aid_nicaraguan_contras,
+        node_religious_groups_in_schools
+    ]
+
+    # Decision tree logic
+    if node_immigration == 1:
+        if node_crime == 1:
+            prediction = 1  # Republican
+        else:
+            if node_mx_missile == 1:
+                prediction = 1
+            else:
+                prediction = 0  # Democrat
+    else:
+        if node_aid_nicaraguan_contras == 1:
+            prediction = 0
+        else:
+            if node_religious_groups_in_schools == 1:
+                prediction = 1
+            else:
+                prediction = 0
+
+    return prediction, emb
+```

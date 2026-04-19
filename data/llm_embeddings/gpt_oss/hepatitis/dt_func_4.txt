@@ -1,0 +1,31 @@
+```python
+def classify(row):
+    # Precompute binary node activations
+    node1 = int(row['BILIRUBIN'] <= 3.0)          # Bilirubin <= 3.0
+    node2 = int(row['ALBUMIN'] <= 3.5)            # Albumin <= 3.5
+    node3 = int(row['PROTIME'] <= 15)             # Prothrombin time <= 15
+    node4 = int(row['ASCITES'] == 0)              # No ascites
+    node5 = int(row['SPIDERS'] == 0)              # No spider angiomata
+
+    emb = [node1, node2, node3, node4, node5]
+
+    # Decision tree logic
+    if node1:
+        if node2:
+            if node3:
+                prediction = 1  # survives
+            else:
+                prediction = 0  # dies
+        else:
+            prediction = 0
+    else:
+        if node4:
+            if node5:
+                prediction = 1
+            else:
+                prediction = 0
+        else:
+            prediction = 0
+
+    return prediction, emb
+```

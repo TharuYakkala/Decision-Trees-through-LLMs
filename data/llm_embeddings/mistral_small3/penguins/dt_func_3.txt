@@ -1,0 +1,30 @@
+```python
+def penguin_species_classifier(feature_row):
+    # Precompute binary vector embeddings
+    node1 = int(feature_row['island'] == 1)
+    node2 = int(feature_row['culmen_length_mm'] <= 45)
+    node3 = int(feature_row['flipper_length_mm'] <= 200)
+    node4 = int(feature_row['body_mass_g'] <= 4000)
+    node5 = int(feature_row['sex'] == 2)
+
+    emb = [node1, node2, node3, node4, node5]
+
+    # Decision tree logic
+    if feature_row['island'] == 1:  # Dream Island
+        if feature_row['culmen_length_mm'] <= 45:
+            return 0  # Adelie
+        else:
+            return 1  # Chinstrap
+    elif feature_row['flipper_length_mm'] <= 200:
+        if feature_row['body_mass_g'] <= 4000:
+            return 0  # Adelie
+        else:
+            return 2  # Gentoo
+    else:
+        if feature_row['sex'] == 2:  # Male
+            return 2  # Gentoo
+        else:
+            return 1  # Chinstrap
+
+    return -1  # Default case (should not reach here if input is valid)
+```

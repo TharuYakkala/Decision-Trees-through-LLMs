@@ -1,0 +1,26 @@
+def predict_heart_disease(row):
+    node1 = int(row['chest_pain'] == 0)
+    node2 = int(row['thalach'] > 150)
+    node3 = int(row['oldpeak'] > 1)
+    node4 = int(row['ca'] >= 2)
+    node5 = int(row['thal'] == 1)
+    node6 = int(row['slope'] == 1)
+
+    emb = [node1, node2, node3, node4, node5, node6]
+
+    if node1:
+        prediction = 0
+    elif node2:
+        prediction = 0
+    elif node3:
+        prediction = 1
+    elif node4:
+        prediction = 1
+    elif node5:
+        prediction = 1
+    elif node6:
+        prediction = 1
+    else:
+        prediction = 0
+
+    return prediction, emb

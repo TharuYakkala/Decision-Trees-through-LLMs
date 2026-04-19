@@ -1,0 +1,24 @@
+def func(row):  
+    node1 = int(row['physician-fee-freeze'] <= 1.5)  
+    node2 = int(row['anti-satellite-test-ban'] <= 1.5)  
+    node3 = int(row['aid-to-nicaraguan-contras'] <= 1.5)  
+    node4 = int(row['mx-missile'] <= 1.5)  
+    node5 = int(row['immigration'] <= 1.5)  
+    emb = [node1, node2, node3, node4, node5]  
+
+    if node1 == 1:  
+        if node2 == 1:  
+            if node3 == 1:  
+                return 0, emb  
+            else:  
+                return 1, emb  
+        else:  
+            return 0, emb  
+    else:  
+        if node4 == 1:  
+            if node5 == 1:  
+                return 1, emb  
+            else:  
+                return 0, emb  
+        else:  
+            return 1, emb

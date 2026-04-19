@@ -1,0 +1,36 @@
+```python
+def penguin_species_classifier(row):
+    """
+    Classifies penguin species based on the provided features.
+
+    Args:
+        row (dict): A dictionary containing the penguin features.
+
+    Returns:
+        tuple: A tuple containing the predicted species (0, 1, or 2) and a list of binary node embeddings.
+    """
+    node1 = int(row['island'] == 0)  # Biscoe
+    node2 = int(row['culmen_length_mm'] > 36)
+    node3 = int(row['flipper_length_mm'] > 200)
+    node4 = int(row['body_mass_g'] > 4000)
+    node5 = int(row['sex'] == 2) # male
+
+    emb = [node1, node2, node3, node4, node5]
+
+    if node1 == 1:  # Biscoe
+        return 0, emb
+    else:
+        if node2 == 1:  # culmen_length_mm > 36
+            if node3 == 1:  # flipper_length_mm > 200
+                return 2, emb
+            else:
+                return 1, emb
+        else:
+            if node4 == 1: # body_mass_g > 4000
+                return 2, emb
+            else:
+                if node5 == 1: # sex == male
+                    return 1, emb
+                else:
+                    return 0, emb
+```

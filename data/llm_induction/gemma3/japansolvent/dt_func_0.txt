@@ -1,0 +1,37 @@
+```python
+def predict_solvency(row):
+    """
+    Predicts whether a company is solvent based on financial ratios.
+
+    Args:
+        row (dict): A dictionary containing the financial ratios.
+
+    Returns:
+        tuple: A tuple containing the prediction (0 or 1) and a list of binary node embeddings.
+    """
+    node1 = int(row['EBIT/TA'] > 0.1)
+    node2 = int(row['NI/TC'] > 0.1)
+    node3 = int(row['Sales/TA'] > 1.0)
+    node4 = int(row['NI/Sales'] > 0.05)
+    node5 = int(row['Equity/TL'] > 0.5)
+    node6 = int(row['Equity/TA'] > 0.3)
+
+    emb = [node1, node2, node3, node4, node5, node6]
+
+    if node1 == 1:
+        if node4 == 1:
+            return 1, emb
+        else:
+            return 0, emb
+    else:
+        if node3 == 1:
+            if node5 == 1:
+                return 1, emb
+            else:
+                return 0, emb
+        else:
+            if node6 == 1:
+                return 0, emb
+            else:
+                return 0, emb
+```

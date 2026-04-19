@@ -1,0 +1,36 @@
+```python
+def predict_heart_disease(row):
+    # Pre‑compute node activations (binary vector)
+    node1 = int(row['age'] > 55)                          # age > 55 ?
+    node2 = int(row['chest_pain'] == 3)                   # chest pain = typical angina ?
+    node3 = int(row['fbs'] == 2)                          # fasting blood sugar = true ?
+    node4 = int(row['oldpeak'] > 1.5)                     # ST depression > 1.5 ?
+    node5 = int(row['thalach'] <= 120)                    # max heart rate <= 120 ?
+    node6 = int(row['exang'] == 2)                        # exercise angina = yes ?
+    node7 = int(row['ca'] > 0)                            # major vessels colored > 0 ?
+    emb = [node1, node2, node3, node4, node5, node6, node7]
+
+    # Decision tree logic
+    if node1:                     # age > 55
+        if node2:                 # typical angina
+            return 1, emb        # disease
+        else:                     # other chest pain types
+            if node3:             # fasting blood sugar true
+                return 1, emb
+            else:
+                if node4:         # ST depression high
+                    return 1, emb
+                else:
+                    return 0, emb
+    else:                         # age <= 55
+        if node5:                 # max heart rate low
+            return 0, emb
+        else:                     # max heart rate high
+            if node6:             # exercise angina yes
+                return 1, emb
+            else:
+                if node7:         # vessels colored
+                    return 1, emb
+                else:
+                    return 0, emb
+```

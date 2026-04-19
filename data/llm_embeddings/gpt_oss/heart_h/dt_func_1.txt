@@ -1,0 +1,43 @@
+```python
+def predict(row):
+    """
+    Decision tree classifier for heart disease prediction.
+    Features expected in `row`:
+      - age (int)
+      - exang (int)  # 1 = no, 2 = yes
+      - oldpeak (float)
+      - chest_pain (int)  # 0,1,2,3
+      - chol (int)
+    Returns:
+      - prediction (int): 1 if heart disease, 0 otherwise
+      - emb (list[int]): binary vector of node evaluations
+    """
+    # Evaluate nodes (binary conditions)
+    node1 = int(row['age'] > 55)                 # age > 55
+    node2 = int(row['exang'] > 1)                # exercise angina present
+    node3 = int(row['oldpeak'] > 1.5)            # significant ST depression
+    node4 = int(row['chest_pain'] == 3)          # typical angina
+    node5 = int(row['chol'] > 240)               # high cholesterol
+
+    emb = [node1, node2, node3, node4, node5]
+
+    # Decision tree logic
+    if node1:
+        if node2:
+            pred = 1
+        else:
+            if node3:
+                pred = 1
+            else:
+                pred = 0
+    else:
+        if node4:
+            pred = 1
+        else:
+            if node5:
+                pred = 1
+            else:
+                pred = 0
+
+    return pred, emb
+```

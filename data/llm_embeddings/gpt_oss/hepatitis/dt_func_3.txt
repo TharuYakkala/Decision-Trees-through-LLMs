@@ -1,0 +1,48 @@
+```python
+def predict_survival(row):
+    """
+    Predict whether a patient survives (1) or dies (0) based on clinical features.
+    
+    Parameters
+    ----------
+    row : dict or pandas.Series
+        Must contain the following keys:
+        'BILIRUBIN', 'ALBUMIN', 'PROTIME', 'ASCITES', 'VARICES'
+        (all numeric values; binary features are 0 or 1).
+    
+    Returns
+    -------
+    prediction : int
+        1 for survive, 0 for die.
+    emb : list[int]
+        Binary vector of node conditions evaluated during the tree traversal.
+    """
+    # Pre‑compute node conditions
+    node1 = int(row['BILIRUBIN'] > 3.5)          # High bilirubin
+    node2 = int(row['ALBUMIN'] > 2.5)            # Adequate albumin
+    node3 = int(row['PROTIME'] > 18)             # Prolonged prothrombin time
+    node4 = int(row['ASCITES'] == 1)             # Presence of ascites
+    node5 = int(row['VARICES'] == 1)             # Presence of varices
+
+    emb = [node1, node2, node3, node4, node5]
+
+    # Decision tree logic
+    if node1 == 0:  # BILIRUBIN <= 3.5
+        if node2 == 1:  # ALBUMIN > 2.5
+            if node3 == 0:  # PROTIME <= 18
+                prediction = 1  # Survive
+            else:
+                prediction = 0  # Die
+        else:
+            prediction = 0  # Die
+    else:  # BILIRUBIN > 3.5
+        if node4 == 1:  # Ascites present
+            prediction = 0  # Die
+        else:
+            if node5 == 1:  # Varices present
+                prediction = 0  # Die
+            else:
+                prediction = 1  # Survive
+
+    return prediction, emb
+```

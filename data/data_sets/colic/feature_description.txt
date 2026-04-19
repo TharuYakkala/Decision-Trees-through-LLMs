@@ -1,4 +1,4 @@
-Features:
+Feature_name: description
 surgery: surgery (1 = no, 2 = yes)
 Age: Age (0 = adult, 1 = young)
 rectal_temperature: Rectal Temperature (°C)
@@ -24,3 +24,5 @@ outcome: Outcome (1 = died, 2 = euthanized, 3 = lived)
 
 Target variable:
 target: a horse colic lesion is surgical or not (0 = no surgery, 1 = surgery)
+
+**Ensure that when accessing the features in the function, you use row[feature_name], example row['pulse'] and not the description.**

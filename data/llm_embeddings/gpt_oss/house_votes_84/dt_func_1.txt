@@ -1,0 +1,22 @@
+```python
+def predict(row):
+    # Pre‑compute binary vector of node conditions
+    node0 = int(row['handicapped-infants'] == 2)               # 1 = yes, 0 = no
+    node1 = int(row['water-project-cost-sharing'] == 2)       # 1 = yes, 0 = no
+    node2 = int(row['aid-to-nicaraguan-contras'] == 2)         # 1 = yes, 0 = no
+    emb = [node0, node1, node2]
+
+    # Decision tree logic
+    if node0 == 1:
+        if node1 == 1:
+            pred = 1  # Republican
+        else:
+            if node2 == 1:
+                pred = 1  # Republican
+            else:
+                pred = 0  # Democrat
+    else:
+        pred = 0      # Democrat
+
+    return pred, emb
+```

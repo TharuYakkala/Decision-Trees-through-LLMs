@@ -1,0 +1,26 @@
+def predict_party(row):
+    node_1 = int(row['handicapped infants'] == 1)
+    node_2 = int(row['water project cost sharing'] == 1)
+    node_3 = int(row['adoption of the budget resolution'] == 1)
+    node_4 = int(row['physician fee freeze'] == 1)
+    node_5 = int(row['el salvador aid'] == 1)
+    node_6 = int(row['religious groups in schools'] == 1)
+    node_7 = int(row['anti satellite test ban'] == 1)
+    node_8 = int(row['aid to nicaraguan contras'] == 1)
+    node_9 = int(row['mx missile'] == 1)
+    node_10 = int(row['immigration'] == 1)
+    node_11 = int(row['synfuels corporation cutback'] == 1)
+    node_12 = int(row['education spending'] == 1)
+    node_13 = int(row['superfund right to sue'] == 1)
+    node_14 = int(row['crime'] == 1)
+    node_15 = int(row['duty free exports'] == 1)
+    node_16 = int(row['export administration act south africa'] == 1)
+
+    emb = [node_1, node_2, node_3, node_4, node_5, node_6, node_7, node_8, node_9, node_10, node_11, node_12, node_13, node_14, node_15, node_16]
+
+    if node_1 == 1 and node_2 == 1 and node_3 == 1 and node_4 == 1 and node_5 == 1 and node_6 == 1 and node_7 == 1 and node_8 == 1 and node_9 == 1 and node_10 == 1 and node_11 == 1 and node_12 == 1 and node_13 == 1 and node_14 == 1 and node_15 == 1 and node_16 == 1:
+        return 0, emb
+    elif node_1 == 0 and node_2 == 0 and node_3 == 0 and node_4 == 0 and node_5 == 0 and node_6 == 0 and node_7 == 0 and node_8 == 0 and node_9 == 0 and node_10 == 0 and node_11 == 0 and node_12 == 0 and node_13 == 0 and node_14 == 0 and node_15 == 0 and node_16 == 0:
+        return 1, emb
+    else:
+        return 1, emb

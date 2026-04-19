@@ -1,0 +1,47 @@
+```python
+def predict_solvent(row):
+    """
+    Predict whether a company is solvent (1) or insolvent (0) based on key financial ratios.
+    
+    Parameters
+    ----------
+    row : dict or pandas.Series
+        A mapping from feature name to its value. Expected keys:
+        'Equity/TL', 'EBIT/TA', 'NI/TC', 'NI/Sales', 'WC/TA'.
+    
+    Returns
+    -------
+    tuple
+        (prediction, embedding)
+        prediction : int (0 or 1)
+        embedding : list of int (0 or 1) representing the truth values of the decision nodes
+    """
+    # Pre‑compute binary node values
+    node1 = int(row['Equity/TL'] > 1.0)           # Is equity greater than liabilities?
+    node2_1 = int(row['EBIT/TA'] > 0.05)          # EBIT per total assets threshold
+    node2_2 = int(row['NI/TC'] > 0.05)            # Net income per total capital threshold
+    node3_1 = int(row['NI/Sales'] > 0.05)         # Net income per sales threshold
+    node3_2 = int(row['WC/TA'] > 0.1)             # Working capital per total assets threshold
+    
+    emb = [node1, node2_1, node2_2, node3_1, node3_2]
+    
+    # Decision tree logic
+    if node1:  # Equity > Liabilities
+        if node2_1:  # EBIT/TA high
+            if node3_1:  # NI/Sales high
+                pred = 1
+            else:
+                pred = 0
+        else:  # EBIT/TA low
+            if node3_2:  # WC/TA high
+                pred = 1
+            else:
+                pred = 0
+    else:  # Equity <= Liabilities
+        if node2_2:  # NI/TC high
+            pred = 1
+        else:
+            pred = 0
+    
+    return pred, emb
+```

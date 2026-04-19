@@ -1,0 +1,86 @@
+```python
+def predict_survival(row):
+    """
+    Predicts patient survival based on the given features.
+
+    Args:
+        row (dict): A dictionary containing the feature values for a patient.
+
+    Returns:
+        tuple: A tuple containing the predicted survival (0 or 1) and a list of binary node embeddings.
+    """
+
+    node1 = int(row['AGE'] > 50)
+    node2 = int(row['SEX'] == 2)
+    node3 = int(row['STEROID'] == 1)
+    node4 = int(row['BILIRUBIN'] > 2.0)
+    node5 = int(row['PROTIME'] > 40)
+    node6 = int(row['HISTOLOGY'] == 1)
+
+    emb = [node1, node2, node3, node4, node5, node6]
+
+    if node1 == 0:
+        if node2 == 1:
+            if node3 == 1:
+                return 1, emb + [1]
+            else:
+                if node4 == 0:
+                    return 0, emb + [0]
+                else:
+                    if node5 == 0:
+                        return 0, emb + [1]
+                    else:
+                        return 0, emb + [0]
+        else:
+            if node3 == 1:
+                if node4 == 0:
+                    return 1, emb + [1]
+                else:
+                    return 0, emb + [0]
+            else:
+                if node4 == 0:
+                    if node5 == 0:
+                        return 1, emb + [1]
+                    else:
+                        return 0, emb + [0]
+                else:
+                    if node5 == 0:
+                        return 0, emb + [1]
+                    else:
+                        return 0, emb + [0]
+    else:
+        if node2 == 1:
+            if node3 == 1:
+                if node4 == 0:
+                    return 1, emb + [1]
+                else:
+                    return 0, emb + [0]
+            else:
+                if node4 == 0:
+                    if node5 == 0:
+                        return 1, emb + [1]
+                    else:
+                        return 0, emb + [0]
+                else:
+                    if node5 == 0:
+                        return 0, emb + [1]
+                    else:
+                        return 0, emb + [0]
+        else:
+            if node3 == 1:
+                if node4 == 0:
+                    return 0, emb + [1]
+                else:
+                    return 0, emb + [0]
+            else:
+                if node4 == 0:
+                    if node5 == 0:
+                        return 0, emb + [1]
+                    else:
+                        return 0, emb + [0]
+                else:
+                    if node5 == 0:
+                        return 0, emb + [1]
+                    else:
+                        return 0, emb + [0]
+```

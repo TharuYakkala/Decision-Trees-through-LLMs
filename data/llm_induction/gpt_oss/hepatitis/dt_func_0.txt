@@ -1,0 +1,18 @@
+```python
+def predict(row):
+    # Node 1: Bilirubin threshold
+    node1 = int(row['BILIRUBIN'] <= 2.0)
+    # Node 2: Albumin threshold (only relevant if node1 fails)
+    node2 = int(row['ALBUMIN'] <= 2.5)
+    emb = [node1, node2]
+
+    if node1 == 1:
+        prediction = 1  # patient survives
+    else:
+        if node2 == 1:
+            prediction = 0  # patient dies
+        else:
+            prediction = 1  # patient survives
+
+    return prediction, emb
+```

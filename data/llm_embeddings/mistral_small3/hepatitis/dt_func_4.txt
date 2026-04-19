@@ -1,0 +1,25 @@
+```python
+def decision_tree_classifier(feature_row):
+    node1 = int(feature_row['ALBUMIN'] < 3.5)
+    node2 = int(feature_row['AGE'] > 50)
+    node3 = int(feature_row['STEROID'] == 1)
+    node4 = int(feature_row['ANTIVIRALS'] == 1)
+    node5 = int(feature_row['BILIRUBIN'] > 1.5)
+    node6 = int(feature_row['SGOT'] > 50)
+    node7 = int(feature_row['PROTIME'] > 12)
+
+    emb = [node1, node2, node3, node4, node5, node6, node7]
+
+    if node1 and node2 and node3:
+        return 0, emb
+    elif node1 and node2 and not node3 and node4:
+        return 1, emb
+    elif node1 and not node2 and node5:
+        return 0, emb
+    elif not node1 and node6 and node7:
+        return 0, emb
+    elif not node1 and not node6 and not node7:
+        return 1, emb
+    else:
+        return 0, emb
+```

@@ -1,0 +1,53 @@
+```python
+def predict_heart_disease(row):
+    """
+    Predicts whether a patient has heart disease based on a decision tree.
+
+    Args:
+        row (dict): A dictionary containing the patient's features.
+
+    Returns:
+        tuple: A tuple containing the prediction (0 or 1) and a list of binary node embeddings.
+    """
+    node1 = int(row['age'] > 55)
+    node2 = int(row['sex'] == 'male')
+    node3 = int(row['chest_pain'] == 3)
+    node4 = int(row['trestbps'] > 130)
+    node5 = int(row['chol'] > 200)
+    node6 = int(row['thalach'] > 150)
+    node7 = int(row['oldpeak'] > 1)
+    node8 = int(row['slope'] == 2)
+    node9 = int(row['ca'] > 0)
+    node10 = int(row['thal'] == 1)
+
+    emb = [node1, node2, node3, node4, node5, node6, node7, node8, node9, node10]
+
+    if node1 == 0:
+        if node2 == 0:
+            if node3 == 0:
+                return 0, emb
+            else:
+                if node4 == 0:
+                    return 0, emb
+                else:
+                    return 1, emb
+        else:
+            if node5 == 0:
+                return 0, emb
+            else:
+                if node6 == 0:
+                    return 1, emb
+                else:
+                    return 0, emb
+    else:
+        if node7 == 0:
+            if node8 == 0:
+                return 1, emb
+            else:
+                return 0, emb
+        else:
+            if node9 == 0:
+                return 1, emb
+            else:
+                return 1, emb
+```

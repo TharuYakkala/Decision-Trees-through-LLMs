@@ -1,0 +1,22 @@
+```python
+def predict_party(row):
+    # Precompute binary node evaluations
+    node1 = int(row['immigration'] == 2)                 # Root: immigration yes?
+    node2 = int(row['crime'] == 2)                      # Left child: crime yes?
+    node3 = int(row['duty free exports'] == 2)          # Right child: duty free exports yes?
+    emb = [node1, node2, node3]
+
+    # Decision tree logic
+    if node1:  # immigration == yes
+        if node2:  # crime == yes
+            prediction = 1  # Republican
+        else:  # crime == no
+            prediction = 0  # Democrat
+    else:  # immigration == no
+        if node3:  # duty free exports == yes
+            prediction = 0  # Democrat
+        else:  # duty free exports == no
+            prediction = 1  # Republican
+
+    return prediction, emb
+```

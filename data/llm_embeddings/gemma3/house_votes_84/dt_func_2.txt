@@ -1,0 +1,83 @@
+```python
+def classify_party_affiliation(row):
+    """
+    Classifies party affiliation (Republican or Democrat) based on voting record.
+
+    Args:
+        row (dict): A dictionary containing feature values for a single vote record.
+
+    Returns:
+        tuple: A tuple containing the predicted party affiliation (0 for Democrat, 1 for Republican)
+               and a list of binary embeddings representing the decision path.
+    """
+
+    # Precompute binary embeddings for each node condition
+    node1 = int(row['handicapped-infants'] > 1)
+    node2 = int(row['water-project-cost-sharing'] > 1)
+    node3 = int(row['adoption-of-the-budget-resolution'] > 1)
+    node4 = int(row['physician-fee-freeze'] > 1)
+    node5 = int(row['el-salvador-adi'] > 1)
+    node6 = int(row['religious-groups-in-schools'] > 1)
+    node7 = int(row['anti-satellite-test-ban'] > 1)
+    node8 = int(row['aid-to-nicaraguan-contras'] > 1)
+    node9 = int(row['mx-missile'] > 1)
+    node10 = int(row['immigration'] > 1)
+    node11 = int(row['synfuels-corporation-cutback'] > 1)
+    node12 = int(row['education-spending'] > 1)
+    node13 = int(row['superfund-right-to-sue'] > 1)
+    node14 = int(row['crime'] > 1)
+    node15 = int(row['duty-free-exports'] > 1)
+    node16 = int(row['export-administration-act-south-africa'] > 1)
+    
+    emb = [node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, node11, node12, node13, node14, node15, node16]
+    
+    if node1 == 0:
+        if node2 == 1:
+            return 1, emb
+        else:
+            if node3 == 1:
+                return 0, emb
+            else:
+                if node4 == 1:
+                    return 0, emb
+                else:
+                    if node5 == 0:
+                        if node6 == 1:
+                            return 1, emb
+                        else:
+                            if node7 == 0:
+                                if node8 == 1:
+                                    return 1, emb
+                                else:
+                                    if node9 == 1:
+                                        return 1, emb
+                                    else:
+                                        return 0, emb
+                            else:
+                                return 0, emb
+                    else:
+                        if node10 == 1:
+                            return 0, emb
+                        else:
+                            if node11 == 0:
+                                return 0, emb
+                            else:
+                                if node12 == 1:
+                                    return 0, emb
+                                else:
+                                    if node13 == 1:
+                                        return 1, emb
+                                    else:
+                                        if node14 == 0:
+                                            return 0, emb
+                                        else:
+                                            if node15 == 1:
+                                                return 0, emb
+                                            else:
+                                                return 1, emb
+    else:
+        if node16 == 0:
+            return 0, emb
+        else:
+            return 1, emb
+```
