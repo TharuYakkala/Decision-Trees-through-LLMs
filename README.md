@@ -3,10 +3,10 @@
 
 ## SUMMARY
 Replication of Oh LLM, I’m Asking Thee, Please Give Me a Decision Tree”: Zero-Shot Decision Tree Induction and Embedding with Large Language Models (KDD conference) paper for DS8008 Class.
-- We prompt Gemini 2.5 Flash with informationa about a dataset, such as features, and ask it to generate decision tree logic internally.
+- We prompt 4 Open Source Models from Ollama with informationa about a dataset, such as features, and ask it to generate decision tree logic internally.
 - It also then takes that internal logic and creates a function that can be used as a classifier.
-- The logic of these functions are then used to evaluate the performance of of these decision trees vs. randomly guessing.
-- Each dataset is used to prompt the LLM 5 times, to generate 5 different decision trees.
+- The logic of these functions are then used to evaluate the performance of of these decision trees in classification and embedding extraction.
+- Each dataset is used to prompt the LLM 5 times, to generate 5 different decision trees. This is done twice, once for decision tree induction method, and another time for decision tree embedding method.
 
 Original Paper Repository: https://github.com/ml-lab-htw/llm-trees
 ## 📂 Folder Structure
