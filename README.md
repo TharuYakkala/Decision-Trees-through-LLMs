@@ -8,6 +8,7 @@ Replication of Oh LLM, I’m Asking Thee, Please Give Me a Decision Tree”: Zer
 - The logic of these functions are then used to evaluate the performance of of these decision trees vs. randomly guessing.
 - Each dataset is used to prompt the LLM 5 times, to generate 5 different decision trees.
 
+Original Paper Repository: https://github.com/ml-lab-htw/llm-trees
 ## 📂 Folder Structure
 ```
 DS8008_LLM_TREE
