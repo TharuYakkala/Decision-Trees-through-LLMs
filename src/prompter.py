@@ -84,7 +84,7 @@ def get_dt_functions_out(prompts, output_path, temperature=1.0, dt_trees=1):
             for i in range(dt_trees):
                 dt_path = dataset_path / f"dt_func_{i}.txt"
                 if dt_path.exists(): # skip datasets already done
-                  break
+                  continue
                 response = chat(
                     model=model,
                     messages=[{'role': 'system', 'content': prompt['system']},

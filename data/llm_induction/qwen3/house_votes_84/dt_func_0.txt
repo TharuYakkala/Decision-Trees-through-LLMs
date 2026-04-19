@@ -1,8 +1,0 @@
-def func(row):
-    node1 = int(row['physician-fee-freeze'] == 2)
-    node2 = int(row['anti-satellite-test-ban'] == 2)
-    emb = [node1, node2]
-    if node1 == 1:
-        return 1, emb
-    else:
-        return 0, emb

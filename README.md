@@ -63,20 +63,13 @@ DS8008_LLM_TREE
 ``` python
 pip install -r requirements.txt
 ```
-
-## How to extract LLM trees
-The method we used mainly works on colab using the google.colab.ai api which doesn't require an api key.
-
-- Upload [dt_extractor_colab](src/dt_extractor_colab.ipynb) and use the data_sets folder in order to extract the functions.
-
-For Example: if data_sets is in the working directory, you can set your out output_path and it will save the LLM outputs there.
-``` python
-generate_dt_funcs(
-    datasets_path="./data_sets",
-    output_path="./Gemini_2-5-Flash",
-    model=ai,
-    num_dt=5
-)
+* You will also need to install Ollama software from, https://ollama.com/download/windows
+* In the env terminal after running requirements.txt, which also installs ollama python package to env, you will need to run the following commands to pull the models to your env.
+```bash
+ollama pull gpt-oss:20b
+ollama pull qwen3:14B
+ollama pull gemma3:12b
+ollama pull mistral-small3.2:24b
 ```
 
 ## Evaluate LLM Trees
