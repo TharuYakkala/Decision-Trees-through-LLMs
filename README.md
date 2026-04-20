@@ -29,17 +29,17 @@ The first half of this readme covers the original research paper while the latte
 In this section, we briefly discuss the <u> original research paper </u> by Knauer et al. (2025) and explain key insights and motivations.  
 
 **Motivation**  
-The *motivation* behind the paper comes from **knowledge distillation** of LLMs (their "world knowledge") and the idea that data can be scarce or propriety. This paper also draws from **in-context learning** and **transfer learning**. The key idea is to find a way to use the "world knowledge" that large language models have, which have been trained on an enormous amount of data from the internet, and derive *models* (in this case, decision trees), **without any training data** ever passed to the LLM. This alleviovercomes the issue of privacy concerns with proprietary data and demonstrates how LLMs can still be leveraged for small datasets that would otherwise be difficult to train in models.
+The *motivation* behind the paper comes from **knowledge distillation** of LLMs (their "world knowledge") and the idea that data can be scarce or propriety. This paper also draws from **in-context learning** and **transfer learning**. The key idea is to find a way to use the "world knowledge" that large language models have, which have been trained on an enormous amount of data from the internet, and derive *models* (in this case, decision trees), **without any training data** ever passed to the LLM. This overcomes the issue of privacy concerns with proprietary data and demonstrates how LLMs can still be leveraged for small datasets that would otherwise be difficult to train in models.
 
 > Exercept from the paper: "we present the first approach to apply state-of-the-art LLMs for zero-shot model generation using in-context learning, i.e., we show how LLMs can build intrinsically interpretable trees without access to pretrained model weights and without any training data" (Knauer et al., 2025)  
 
-Domains of study: large language models, zero-shot prompting, in-context learning, knowledge distillation, transfer learning, data scarcity, intrinsic model induction   
+<u>Domains of study:</u> large language models, zero-shot prompting, in-context learning, knowledge distillation, transfer learning, data scarcity, intrinsic model induction   
 
 <br>  
 
 **Methdology**  
 *Part 1: Zero-shot Decision Tree Induction*  
-Authors ask an LLM to generate a decision tree using only the feature names (column headers); no actual data values, no examples (zero-shot prompting). Then the LLM is used again to convert text-based decision tree into a Python function to be able to make predictions on data.
+Authors ask an LLM to generate a decision tree using only the feature names (column headers); no actual data values, no examples (zero-shot prompting). Then the LLM is used again to convert text-based decision tree into a Python function to be able to make predictions on data.  
 → LLM Models Used: Claude 3.5 Sonnet, Gemini 1.5 Pro, GPT-4o, GPT-o1  
 → Baseline Models Used: BSS, OCTs, AutoGluon, Auto-Prognosis, TabPFN
 
@@ -70,15 +70,11 @@ LLM Models Used (Ollama):
 3. mistral_small3
 4. qwen3  
 
-Part 1 Baseline Models Used:  
-- Autogluon 
-- TabPFN
+Part 1 Baseline Models Used: Autogluon, TabPFN  
+
   
-Part 2 Baseline Models Used:  
-- MLP
-- RandomTrees
-- XGBoost
-- ..
+Part 2 Baseline Models Used: MLP, RandomForests, XGBoost, ...  
+
 
 <br>  
 
@@ -151,12 +147,56 @@ ollama pull qwen3:14B
 ollama pull gemma3:12b
 ollama pull mistral-small3.2:24b
 ```
+  
+<br>  
 
-## Evaluate LLM Trees
-This is done using the [project report notebook](LLM_Trees_project_report.ipynb) which you can easily follow along to test the functions that we extracted.
+## Required Dependencies  
+*This is for running individual models by yourself*  
 
-**[NOTE]** To test your own functions that you extract, you will need to edit them yourself, and create an evaluation function for them. You can refer to the scripts in `src/Evaluators` for examples.
+To run the Autogluon model, you may need to run the following in *anaconda prompt*:
+```
+conda create -n myenv python=3.11 -y
+conda activate myenv
+pip install -U pip
+pip install -U setuptools wheel
+pip install autogluon --extra-index-url https://download.pytorch.org/whl/cpu
+```  
+(refer to official docs [here](https://auto.gluon.ai/stable/install.html))
 
+To run the TabPFN model, you may need to run the following:
+```bash
+pip install tabpfn
+```
+You also may be prompted for an API key when running TabPFN, follow the instructions at the CLI when prompted to do so. 
+
+**[NOTE]:** These models may require different versions of scikit or python. Please refer to their official documentations for further details.
+
+
+## Part 1: Decision Tree Induction  
+**Follow along the project report notebook for the entire pipeline. Make sure to run each cell from the start.**  
+
+Only the Ollama LLMs are prompted multiple times to generate decision trees transformed into python functions. The prompted decision tree functions can be found in `data/llm_induction/model_name/dataset_name/dt_func_#.txt` where model_name is one of above llms and dataset_name is one of the 5 datasets. Each dataset has 5 functions, and is prompted for each of the 4 llms.  
+You can find the prompt in `src/pompter.py` as a reference if you are creating your own prompts.  
+
+### Evaluate LLM Trees
+This is done using the [project report notebook](LLM_Trees_project_report.ipynb) which you can easily follow along to test the functions that we extracted under the section: Induction Evaluation. 
+
+**[NOTE]** To test your own functions that you extract, you will need to edit them yourself, and create an evaluation function for them. You can refer to the scripts in `src/Evaluators` for examples.  
+
+
+## Part 2: Embedding Induction  
+The decision tree functions as a result of prompting the llms can be found in `data/llm_embeddings/model_name/dataset_name/dt_func_#.txt`.  
+Refer to *Step 2* in `src/prompter.py` for help with prompting for embeddings (if prompting yourself).  
+
+### Evaluate LLM Embeddings  
+Again you may follow the [project report notebook](LLM_Trees_project_report.ipynb) under the section: Embedding Evaluation. 
+
+## Results and Discussion  
+*Part 1: DT Induction Results*
+Among all 5 datasets, Autogluon consistently had the highest f1-score. However, for the bankruptcy dataset, almost all the decision trees classifiers from llms were in close competition with the data-driven models, each achieving greater than 0.5. The overall mean for the llm decision trees classifications were within a bound of 0.2 with TabPFN. 
+
+*Part 2: Embedding Induction Results*
+mention mistral...
 
 ## SUMMARY
 Replication of Oh LLM, I’m Asking Thee, Please Give Me a Decision Tree”: Zero-Shot Decision Tree Induction and Embedding with Large Language Models (KDD conference) paper for DS8008 Class.
@@ -164,5 +204,3 @@ Replication of Oh LLM, I’m Asking Thee, Please Give Me a Decision Tree”: Zer
 - It also then takes that internal logic and creates a function that can be used as a classifier.
 - The logic of these functions are then used to evaluate the performance of of these decision trees in classification and embedding extraction.
 - Each dataset is used to prompt the LLM 5 times, to generate 5 different decision trees. This is done twice, once for decision tree induction method, and another time for decision tree embedding method.
-
-Original Paper Repository: https://github.com/ml-lab-htw/llm-trees
